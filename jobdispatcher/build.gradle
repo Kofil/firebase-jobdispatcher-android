@@ -1,5 +1,4 @@
 apply plugin: "com.android.library"
-apply from: "coverage.gradle"
 
 android {
     compileSdkVersion 23
@@ -13,9 +12,6 @@ android {
     }
 
     buildTypes {
-        debug {
-            testCoverageEnabled true
-        }
         release {
             minifyEnabled false
         }
@@ -31,10 +27,15 @@ task javadoc(type: Javadoc) {
 
 task aar(dependsOn: assembleRelease)
 
+repositories {
+    maven { url "https://jcenter.bintray.com" }
+}
+
 dependencies {
     testCompile "junit:junit:4.12"
     testCompile "org.robolectric:robolectric:3.0"
     testCompile "org.mockito:mockito-core:1.+"
 
-    compile "com.android.support:support-v4:23.3.0"
+    compile "com.android.support:support-v4:23.2.1"
+    compile "com.google.android.gms:play-services-gcm:8.4.0"
 }
